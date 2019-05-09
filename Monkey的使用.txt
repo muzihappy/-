@@ -1,0 +1,18 @@
+Monkey使用前需要确定包名，确定包名的步骤如下：
+方法一：
+1.打开夜神模拟器，cmd夜神模拟器连接到本机，打开雪崩
+2.打开E:\android-studio\AndroidSDK\tools\bin\uiautomatorviewer.bat
+3.出现UI Automator Viewer（用户界面自动查看器）页面，点击左上角第二个，出现雪崩页面，有些叫根据package找到包名cn.edu.hebtu.software.snowcarsh2
+方法二：
+
+
+Monkey语法：
+1.adb shell monkey -p 包名 整数 -v --throttle 整数；-p 包名是指定测试的程序；-v 是参数打印信息的详细级别，可以跟多个（0~2级），默认级别是0：-v 只打印测试执行发送给被测Activity的事件；级别1：-v -v 增加了哪些Activity被选中，将在信息中被输出；级别2：-v -v -v 哪些应用已经安装了但是却没有被选中的信息也被输出；--throttle 整数 是在事件之间加入固定延迟。
+例：adb shell monkey -p cn.edu.hebtu.software.snowcarsh2 -v --throttle 200 10，代表向雪崩app发送10次随机事件,每次事件间隔时间为200毫秒；
+ 
+2.adb shell Monkey -p cn.edu.hebtu.software.snowcarsh2 --throttle 200 --pct-thouch 10 --pct-motion 20 -s 1234 -v 10
+向雪崩发送10次随机事件。每次间隔时间为200毫秒，其中设定触屏的事件占比为10%，滑动事件占比20%
+--pct-touch 设置在整个过程中点击操作所占的百分比；--pct-motion 设置滑动所占百分比；-s 伪随机数生成器的种子值，前后两次执行将会生成相同的事件序列。
+
+3.adb shell Monkey -p cn.edu.hebtu.software.snowcarsh2 --throttle 200 --ignore-crashes --ignore-timeouts --ignore-security-exceptions -v 1000 >D:Monkey1.log
+--ignore-crashes 忽略应用程序崩溃、异常，直到计数完成；--ignore-timeouts 忽略应用程序超时错误，直到计数完成；--ignore-security-exceptions 忽略测试过程中安全问题，直到计数完成。把生成的日志文件存到D:Monkey1.log中。
